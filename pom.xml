@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.acme.integration</groupId>
+    <artifactId>integration-resources</artifactId>
+    <packaging>mule-domain</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Acme Domain Project</name>
+	<description>Share Mule contexts and connectors across many applications</description>
+	<inceptionYear>2018</inceptionYear>
+	<organization>
+		<name>Acme Corporation</name>
+		<url>https://www.acme.com/</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>David L. Whitehurst</name>
+			<email>david@avodagroup.us</email>
+			<organization>Avodagroup</organization>
+			<organizationUrl>https://avodagroup.us/</organizationUrl>
+			<roles>
+				<role>Architect</role>
+			</roles>
+			<timezone>America/New_York</timezone>
+		</developer>
+	</developers>
+
+	<properties>
+		<mule.version>3.9.0</mule.version>
+		<activemq.version>2.3.0</activemq.version>
+	    <security.version>1.6.0</security.version>
+	</properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-domain-maven-plugin</artifactId>
+                <version>1.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <!-- if MULE_HOME variable is configured then the domain will be copy to domains directory of your mule installation -->
+                    <copyToDomainsDirectory>true</copyToDomainsDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+        <finalName>integration-resources</finalName>
+    </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mulesoft-release</id>
+            <name>mulesoft release repository</name>
+            <layout>default</layout>
+            <url>http://repository.mulesoft.org/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    
+    <dependencies>
+		<dependency>
+            <groupId>com.mulesoft.security</groupId>
+            <artifactId>mule-module-security-property-placeholder</artifactId>
+            <version>${security.version}</version>
+        </dependency>
+    	<dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>artemis-jms-client-all</artifactId>
+            <version>${activemq.version}</version>
+            <scope>compile</scope>
+        </dependency>
+	    <dependency>
+            <groupId>org.mule.transports</groupId>
+            <artifactId>mule-transport-ssl</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <distributionManagement>
+        <snapshotRepository>
+           <id>nexus</id>
+           <name>Maven Snapshots</name>
+           <url>https://nexus.acme.com:8443/repository/maven-snapshots</url>
+        </snapshotRepository>
+        <repository>
+           <id>nexus</id>
+           <name>Maven Releases</name>
+           <url>https://nexus.acme.com:8443/repository/maven-releases</url>
+        </repository>
+     </distributionManagement>
+</project>
